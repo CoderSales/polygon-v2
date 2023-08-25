@@ -10,7 +10,7 @@ load_dotenv()
 api_key = os.getenv("POLYGON_API_KEY")
 
 # From Polygon.io
-ticker = 'C:EURUSD'  # Note the ticker format for currency pairs
+ticker = 'C:EURUSD'
 sma_url = f"https://api.polygon.io/v1/indicators/sma/{ticker}?timespan=day&adjusted=true&window=50&series_type=close&order=desc&apiKey={api_key}"
 
 # Make the SMA API request
@@ -19,9 +19,12 @@ sma_response = requests.get(sma_url)
 # Check if the request was successful
 if sma_response.status_code == 200:
     sma_data = sma_response.json()
-    # Process the SMA data as needed
-    print("SMA Data:")
-    print(sma_data)
+    # Process and display the SMA data
+    if 'results' in sma_data:
+        for timestamp, sma_value in sma_data['results'].items():
+            print(f"Timestamp: {timestamp}, SMA Value: {sma_value}")
+    else:
+        print("No SMA data found in the response.")
 else:
     print(f"SMA request failed with status code: {sma_response.status_code}")
 
