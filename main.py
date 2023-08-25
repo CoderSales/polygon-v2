@@ -1,5 +1,6 @@
 import os
 import requests
+import time
 from dotenv import load_dotenv
 
 # Load variables from .env file
@@ -26,3 +27,12 @@ if response.status_code == 200:
     print(data)
 else:
     print(f"Request failed with status code: {response.status_code}")
+
+# Countdown
+countdown_time = 15  # seconds
+
+for remaining_time in range(countdown_time, 0, -1):
+    print(f"Continuing in {remaining_time} seconds...", end="\r")
+    time.sleep(1)
+
+print("\nCountdown completed. Continuing with the rest of the program.")
