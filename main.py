@@ -10,12 +10,12 @@ load_dotenv()
 api_key = os.getenv("POLYGON_API_KEY")
 
 # From Polygon.io
-ticker = 'AAPL'
+ticker = 'C:EURUSD'  # Note the ticker format for currency pairs
 start_date = '2023-01-09'
 end_date = '2023-01-09'
 
 # Construct the complete URL with formatted strings
-url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}?apiKey={api_key}"
+url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}?adjusted=true&sort=asc&limit=120&apiKey={api_key}"
 
 # Make the API request
 response = requests.get(url)
