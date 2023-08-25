@@ -11,23 +11,19 @@ api_key = os.getenv("POLYGON_API_KEY")
 
 # From Polygon.io
 ticker = 'C:EURUSD'  # Note the ticker format for currency pairs
-start_date = '2023-01-09'
-end_date = '2023-01-09'
+sma_url = f"https://api.polygon.io/v1/indicators/sma/{ticker}?timespan=day&adjusted=true&window=50&series_type=close&order=desc&apiKey={api_key}"
 
-# Construct the complete URL with formatted strings
-url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}?adjusted=true&sort=asc&limit=120&apiKey={api_key}"
-
-# Make the API request
-response = requests.get(url)
+# Make the SMA API request
+sma_response = requests.get(sma_url)
 
 # Check if the request was successful
-if response.status_code == 200:
-    data = response.json()
-    # Process the data as needed
-    print("Data:")
-    print(data)
+if sma_response.status_code == 200:
+    sma_data = sma_response.json()
+    # Process the SMA data as needed
+    print("SMA Data:")
+    print(sma_data)
 else:
-    print(f"Request failed with status code: {response.status_code}")
+    print(f"SMA request failed with status code: {sma_response.status_code}")
 
 # Countdown
 countdown_time = 15  # seconds
