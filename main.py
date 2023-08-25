@@ -24,6 +24,7 @@ response = requests.get(url)
 if response.status_code == 200:
     data = response.json()
     # Process the data as needed
+    print("Data:")
     print(data)
 else:
     print(f"Request failed with status code: {response.status_code}")
